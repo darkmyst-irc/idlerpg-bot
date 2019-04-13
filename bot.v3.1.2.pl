@@ -1900,7 +1900,7 @@ sub quest {
             if ($line =~ /^Q1 (.*)/) {
                 $quest{text} = $1;
                 $quest{type} = 1;
-                $quest{qtime} = time() + 43200 + int(rand(43201)); # 12-24 hours
+                $quest{qtime} = time() + 3600 + int(rand(10801)); # 1-4 hours
             }
             elsif ($line =~ /^Q2 (\d+) (\d+) (\d+) (\d+) (.*)/) {
                 $quest{p1} = [$1,$2];
