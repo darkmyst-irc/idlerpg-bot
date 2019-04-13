@@ -1931,6 +1931,11 @@ sub quest {
 sub questpencheck {
     my $k = shift;
     my ($quester,$player);
+    my $type = shift;
+    if ($type eq "nick") {
+        return 0;
+    }
+
     for $quester (@{$quest{questers}}) {
         if ($quester eq $k) {
             chanmsg(clog("$k\'s prudence and self-regard has brought the ".
@@ -1978,7 +1983,7 @@ sub penalize {
     return 0 if !exists($rps{$username});
     my $type = shift;
     my $pen = 0;
-    questpencheck($username);
+    questpencheck($username, $type);
     if ($type eq "quit") {
         $pen = int(20 * ($opts{rppenstep}**$rps{$username}{level}));
         if ($opts{limitpen} && $pen > $opts{limitpen}) {
