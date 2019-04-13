@@ -1949,6 +1949,9 @@ sub questpencheck {
                 my $gain = 15 * 60;
                 if ($player eq $k) {
                     $gain = int(15 * ($opts{rppenstep}**$rps{$player}{level}));
+                    if ($opts{limitpen} && $gain > $opts{limitpen}) {
+                        $gain = $opts{limitpen};
+                    }
                 }
                 $rps{$player}{pen_quest} += $gain;
                 $rps{$player}{next} += $gain;
