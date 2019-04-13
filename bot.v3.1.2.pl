@@ -31,6 +31,7 @@ use IO::Socket;
 use IO::Select;
 use Data::Dumper;
 use Getopt::Long;
+use POSIX;
 
 my %opts;
 
@@ -1995,8 +1996,8 @@ sub penalize {
     elsif ($type eq "nick") {
         my $newnick = shift;
         $pen = int(30 * ($opts{rppenstep}**$rps{$username}{level}));
-        if ($opts{limitpen} && $pen > $opts{limitpen}) {
-            $pen = $opts{limitpen};
+        if ($opts{limitpen} && $pen > floor($opts{limitpen} / 10)) {
+            $pen = floor($opts{limitpen} / 10);
         }
         $rps{$username}{pen_nick}+=$pen;
         $rps{$username}{nick} = substr($newnick,1);
