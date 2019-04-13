@@ -1946,7 +1946,10 @@ sub questpencheck {
                          "pressure towards hell. Therefore have you drawn ".
                          "yourselves 15 steps closer to that gaping maw."));
             for $player (grep { $rps{$_}{online} } keys %rps) {
-                my $gain = int(15 * ($opts{rppenstep}**$rps{$player}{level}));
+                my $gain = 15 * 60;
+                if ($player eq $k) {
+                    $gain = int(15 * ($opts{rppenstep}**$rps{$player}{level}));
+                }
                 $rps{$player}{pen_quest} += $gain;
                 $rps{$player}{next} += $gain;
             }
